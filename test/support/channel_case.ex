@@ -1,4 +1,4 @@
-defmodule BlogWeb.ChannelCase do
+defmodule Blog.Web.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -20,16 +20,22 @@ defmodule BlogWeb.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
+      alias Blog.Repo
+      import Ecto
+      import Ecto.Changeset
+      import Ecto.Query
+
+
       # The default endpoint for testing
-      @endpoint BlogWeb.Endpoint
+      @endpoint Blog.Web.Endpoint
     end
   end
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Blog.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Elixir.Blog.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Blog.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Elixir.Blog.Repo, {:shared, self()})
     end
     :ok
   end
